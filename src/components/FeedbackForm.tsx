@@ -27,7 +27,7 @@ export default function FeedbackForm({ policyId }: FeedbackFormProps) {
       .from('feedback')
       .insert({
         comment: comment,
-        policy_id: policyId || null, // Link to policy if provided
+        policy_id: policyId || null,
       });
 
     if (error) {
@@ -35,17 +35,17 @@ export default function FeedbackForm({ policyId }: FeedbackFormProps) {
       setMessage({ type: 'error', text: '피드백 제출에 실패했습니다. 다시 시도해주세요.' });
     } else {
       setMessage({ type: 'success', text: '피드백이 성공적으로 제출되었습니다. 감사합니다!' });
-      setComment(''); // Clear the form
+      setComment('');
     }
     setLoading(false);
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md mt-8">
-      <h3 className="text-xl font-bold mb-4 text-color-text-primary">피드백 남기기</h3>
+    <div className="bg-white p-6 rounded-xl shadow-lg mt-8 border border-gray-200">
+      <h3 className="text-xl font-bold mb-4 text-gray-900">피드백 남기기</h3>
       <form onSubmit={handleSubmit}>
         <textarea
-          className="w-full p-3 border border-[var(--color-border)] rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] text-[var(--color-text-primary)]"
+          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-4 text-gray-800 placeholder-gray-400"
           rows={4}
           placeholder="웹사이트나 이 정책에 대한 의견을 남겨주세요..."
           value={comment}
@@ -54,13 +54,13 @@ export default function FeedbackForm({ policyId }: FeedbackFormProps) {
         ></textarea>
         <button
           type="submit"
-          className="px-6 py-3 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-semibold"
           disabled={loading}
         >
           {loading ? '제출 중...' : '피드백 제출'}
         </button>
         {message && (
-          <p className={`mt-4 text-sm ${message.type === 'success' ? 'text-green-600' : 'text-red-600'}`}>
+          <p className={`mt-4 text-sm ${message.type === 'success' ? 'text-emerald-600' : 'text-red-600'}`}>
             {message.text}
           </p>
         )}

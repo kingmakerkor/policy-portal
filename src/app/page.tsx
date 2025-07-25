@@ -13,7 +13,7 @@ interface Policy {
 }
 
 const PolicySkeleton = () => (
-  <div className="bg-white p-6 rounded-lg shadow-md animate-pulse">
+  <div className="bg-white p-6 rounded-xl shadow-md animate-pulse">
     <div className="h-6 bg-gray-200 rounded w-3/4 mb-2"></div>
     <div className="h-4 bg-gray-200 rounded w-full mb-4"></div>
     <div className="flex gap-2">
@@ -30,21 +30,21 @@ export default function Home() {
   const [policies, setPolicies] = useState<Policy[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [favoritePolicies, setFavoritePolicies] = useState<number[] | null>(null); // Initialize as null
+  const [favoritePolicies, setFavoritePolicies] = useState<number[] | null>(null);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') { // Check if window is defined (client-side)
+    if (typeof window !== 'undefined') {
       const storedFavorites = localStorage.getItem('favoritePolicies');
       if (storedFavorites) {
         setFavoritePolicies(JSON.parse(storedFavorites));
       } else {
-        setFavoritePolicies([]); // Initialize as empty array if no stored favorites
+        setFavoritePolicies([]);
       }
     }
   }, []);
 
   useEffect(() => {
-    if (favoritePolicies !== null) { // Only save if favoritePolicies has been initialized
+    if (favoritePolicies !== null) {
       localStorage.setItem('favoritePolicies', JSON.stringify(favoritePolicies));
     }
   }, [favoritePolicies]);
@@ -70,7 +70,7 @@ export default function Home() {
   }, []);
 
   const toggleFavorite = (policyId: number) => {
-    if (favoritePolicies === null) return; // Should not happen if rendered correctly
+    if (favoritePolicies === null) return;
     setFavoritePolicies(prevFavorites => {
       if (prevFavorites.includes(policyId)) {
         return prevFavorites.filter(id => id !== policyId);
@@ -90,13 +90,13 @@ export default function Home() {
 
   if (error) {
     return (
-      <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-[var(--color-background)]">
+      <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-gray-50">
         <div className="text-center p-8 bg-white rounded-lg shadow-md">
           <h2 className="text-2xl font-bold text-red-600 mb-4">오류 발생!</h2>
-          <p className="text-lg text-[var(--color-text-secondary)] mb-6">{error}</p>
+          <p className="text-lg text-gray-600 mb-6">{error}</p>
           <button
             onClick={fetchPolicies}
-            className="px-6 py-3 bg-[var(--color-primary)] text-white rounded-md hover:bg-[var(--color-primary)]/[.9] transition-colors"
+            className="px-6 py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors"
           >
             다시 시도
           </button>
@@ -106,30 +106,31 @@ export default function Home() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-8 bg-[var(--color-background)]">
-      <div className="w-full max-w-4xl">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold tracking-tight text-[var(--color-text-primary)] sm:text-5xl">
-            정부 정책 및 지원금 정보
+    <main className="flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
+      <div className="w-full max-w-6xl">
+        <div className="text-center mb-16">
+          <h1 className="text-5xl font-extrabold text-gray-900 tracking-tight sm:text-6xl lg:text-7xl">
+            <span className="block text-indigo-600">정부 정책 및</span>
+            <span className="block mt-2">지원금 정보</span>
           </h1>
-          <p className="mt-4 text-lg leading-8 text-[var(--color-text-secondary)]">
-            나에게 맞는 지원금을 찾아보세요.
+          <p className="mt-6 text-xl text-gray-600 max-w-3xl mx-auto">
+            나에게 맞는 지원금을 쉽고 빠르게 찾아보세요. 복잡한 절차 없이 필요한 정보를 한눈에!
           </p>
         </div>
 
-        <div className="mb-8 p-6 bg-white rounded-lg shadow-md">
+        <div className="mb-12 p-6 bg-white rounded-xl shadow-lg border border-gray-200">
           <div className="flex flex-col md:flex-row gap-4 mb-4">
             <input
               type="text"
               placeholder="키워드 검색... (예: 청년, 소상공인, 주택)"
-              className="flex-grow px-4 py-2 border border-[var(--color-border)] rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] text-[var(--color-text-primary)]"
+              className="flex-grow px-5 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-800 placeholder-gray-400"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <select
-              className="border border-[var(--color-border)] rounded-md p-2 w-full text-[var(--color-text-primary)]"
+              className="border border-gray-300 rounded-lg p-3 w-full text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               value={selectedRegion}
               onChange={(e) => setSelectedRegion(e.target.value)}
             >
@@ -142,7 +143,7 @@ export default function Home() {
               <option value="전국">전국</option>
             </select>
             <select
-              className="border border-[var(--color-border)] rounded-md p-2 w-full text-[var(--color-text-primary)]"
+              className="border border-gray-300 rounded-lg p-3 w-full text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               value={selectedTarget}
               onChange={(e) => setSelectedTarget(e.target.value)}
             >
@@ -159,7 +160,7 @@ export default function Home() {
         </div>
 
         {/* AdSense Ad Unit */}
-        <div className="my-8 text-center">
+        <div className="my-10 text-center">
           <ins className="adsbygoogle"
             style={{ display: 'block' }}
             data-ad-client="ca-pub-1542451375735648"
@@ -172,32 +173,32 @@ export default function Home() {
           </script>
         </div>
 
-        <div className="grid gap-6">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {loading ? (
-            Array.from({ length: 5 }).map((_, index) => <PolicySkeleton key={index} />)
+            Array.from({ length: 6 }).map((_, index) => <PolicySkeleton key={index} />)
           ) : filteredPolicies.length > 0 ? (
             filteredPolicies.map((policy) => (
-              <div key={policy.id} className="relative bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+              <div key={policy.id} className="relative bg-white p-6 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1">
                 <Link href={`/policy/${policy.id}`} className="block">
-                  <h2 className="text-xl font-bold mb-2 text-[var(--color-text-primary)]">{policy.title}</h2>
-                  <p className="text-[var(--color-text-secondary)] mb-4">{policy.description}</p>
-                  <div className="flex gap-2 flex-wrap">
-                    <span className="inline-block bg-[var(--color-tag-bg-primary)] text-[var(--color-tag-text-primary)] text-xs font-semibold px-2.5 py-0.5 rounded-full">
+                  <h2 className="text-2xl font-semibold mb-2 text-gray-900 leading-tight">{policy.title}</h2>
+                  <p className="text-gray-600 text-base mb-4 line-clamp-3">{policy.description}</p>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="inline-block bg-indigo-50 text-indigo-700 text-xs font-medium px-3 py-1 rounded-full">
                       {policy.target}
                     </span>
-                    <span className="inline-block bg-[var(--color-tag-bg-secondary)] text-[var(--color-tag-text-secondary)] text-xs font-semibold px-2.5 py-0.5 rounded-full">
+                    <span className="inline-block bg-emerald-50 text-emerald-700 text-xs font-medium px-3 py-1 rounded-full">
                       {policy.region}
                     </span>
                   </div>
                 </Link>
-                {favoritePolicies !== null && ( // Conditionally render button
+                {favoritePolicies !== null && (
                   <button
                     onClick={(e) => {
-                      e.stopPropagation(); // Prevent Link click
-                      e.preventDefault(); // Prevent Link click
+                      e.stopPropagation();
+                      e.preventDefault();
                       toggleFavorite(policy.id);
                     }}
-                    className="absolute top-4 right-4 p-2 rounded-full bg-[var(--color-card-background)] hover:bg-gray-200 transition-colors"
+                    className="absolute top-4 right-4 p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors text-gray-400 hover:text-yellow-500"
                     aria-label="즐겨찾기 추가/제거"
                   >
                     <svg
@@ -214,7 +215,7 @@ export default function Home() {
             ))
           ) : (
             <div className="text-center py-12">
-              <p className="text-lg text-[var(--color-text-secondary)]">검색 결과가 없습니다.</p>
+              <p className="text-lg text-gray-500">검색 결과가 없습니다.</p>
             </div>
           )}
         </div>

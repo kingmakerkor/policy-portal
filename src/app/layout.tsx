@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google"; // Using Inter font for simplicity
+// import { Inter } from "next/font/google"; // No longer needed
 import Link from "next/link";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] }); // No longer needed
 
 export const metadata: Metadata = {
   title: "정부 정책 및 지원금 정보",
@@ -22,18 +22,20 @@ export default function RootLayout({
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1542451375735648"
           crossOrigin="anonymous"></script>
       </head>
-      <body className={inter.className}>
-        <div className="flex flex-col min-h-screen">
-          <header className="bg-[var(--color-primary)] text-white p-4 shadow-md">
-            <nav className="container mx-auto flex justify-between items-center">
-              <Link href="/" className="text-2xl font-bold">정부 정책 및 지원금 정보</Link>
+      <body> {/* Removed inter.className */}
+        <div className="flex flex-col min-h-screen bg-gray-50 text-gray-800"> {/* Added base background and text color */}
+          <header className="bg-white shadow-sm py-4">
+            <nav className="container mx-auto px-4 flex justify-between items-center">
+              <Link href="/" className="text-2xl font-bold text-indigo-600 hover:text-indigo-700 transition-colors">
+                정부 정책 및 지원금 정보
+              </Link>
             </nav>
           </header>
           <main className="flex-grow">
             {children}
           </main>
-          <footer className="bg-[var(--color-text-primary)] text-white p-4 text-center mt-auto">
-            <div className="container mx-auto">
+          <footer className="bg-gray-800 text-gray-300 py-6 text-center text-sm">
+            <div className="container mx-auto px-4">
               &copy; {new Date().getFullYear()} 정부 정책 및 지원금 정보. All rights reserved.
             </div>
           </footer>
