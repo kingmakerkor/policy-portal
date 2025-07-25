@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
-// import { Inter } from "next/font/google"; // No longer needed
 import Link from "next/link";
 import "./globals.css";
-
-// const inter = Inter({ subsets: ["latin"] }); // No longer needed
 
 export const metadata: Metadata = {
   title: "정부 정책 및 지원금 정보",
@@ -22,11 +19,11 @@ export default function RootLayout({
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1542451375735648"
           crossOrigin="anonymous"></script>
       </head>
-      <body> {/* Removed inter.className */}
-        <div className="flex flex-col min-h-screen bg-gray-50 text-gray-800"> {/* Added base background and text color */}
+      <body>
+        <div className="flex flex-col min-h-screen bg-gray-50 text-gray-800">
           <header className="bg-white shadow-sm py-4">
             <nav className="container mx-auto px-4 flex justify-between items-center">
-              <Link href="/" className="text-2xl font-bold text-indigo-600 hover:text-indigo-700 transition-colors">
+              <Link href="/" className="text-2xl font-bold text-blue-600 hover:text-blue-700 transition-colors">
                 정부 정책 및 지원금 정보
               </Link>
             </nav>

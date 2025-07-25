@@ -45,7 +45,7 @@ export default function FeedbackForm({ policyId }: FeedbackFormProps) {
       <h3 className="text-xl font-bold mb-4 text-gray-900">피드백 남기기</h3>
       <form onSubmit={handleSubmit}>
         <textarea
-          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-4 text-gray-800 placeholder-gray-400"
+          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4 text-gray-800 placeholder-gray-400"
           rows={4}
           placeholder="웹사이트나 이 정책에 대한 의견을 남겨주세요..."
           value={comment}
@@ -54,7 +54,7 @@ export default function FeedbackForm({ policyId }: FeedbackFormProps) {
         ></textarea>
         <button
           type="submit"
-          className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-semibold"
+          className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-semibold"
           disabled={loading}
         >
           {loading ? '제출 중...' : '피드백 제출'}

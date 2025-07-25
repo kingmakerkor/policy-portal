@@ -71,7 +71,7 @@ export default function Home() {
 
   const toggleFavorite = (policyId: number) => {
     setFavoritePolicies(prevFavorites => {
-      const currentFavorites = prevFavorites || []; // Ensure it's an array
+      const currentFavorites = prevFavorites || [];
       if (currentFavorites.includes(policyId)) {
         return currentFavorites.filter(id => id !== policyId);
       } else {
@@ -79,14 +79,6 @@ export default function Home() {
       }
     });
   };
-
-  const filteredPolicies = policies.filter(policy => {
-    return (
-      (policy.title.includes(searchTerm) || policy.description.includes(searchTerm)) &&
-      (selectedRegion === 'all' || policy.region === selectedRegion) &&
-      (selectedTarget === 'all' || policy.target === selectedTarget)
-    );
-  });
 
   if (error) {
     return (
@@ -96,7 +88,7 @@ export default function Home() {
           <p className="text-lg text-gray-600 mb-6">{error}</p>
           <button
             onClick={fetchPolicies}
-            className="px-6 py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors"
+            className="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
           >
             다시 시도
           </button>
@@ -110,7 +102,7 @@ export default function Home() {
       <div className="w-full max-w-6xl">
         <div className="text-center mb-16">
           <h1 className="text-5xl font-extrabold text-gray-900 tracking-tight sm:text-6xl lg:text-7xl">
-            <span className="block text-indigo-600">정부 정책 및</span>
+            <span className="block text-blue-600">정부 정책 및</span>
             <span className="block mt-2">지원금 정보</span>
           </h1>
           <p className="mt-6 text-xl text-gray-600 max-w-3xl mx-auto">
@@ -123,14 +115,14 @@ export default function Home() {
             <input
               type="text"
               placeholder="키워드 검색... (예: 청년, 소상공인, 주택)"
-              className="flex-grow px-5 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-800 placeholder-gray-400"
+              className="flex-grow px-5 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 placeholder-gray-400"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <select
-              className="border border-gray-300 rounded-lg p-3 w-full text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="border border-gray-300 rounded-lg p-3 w-full text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={selectedRegion}
               onChange={(e) => setSelectedRegion(e.target.value)}
             >
@@ -143,7 +135,7 @@ export default function Home() {
               <option value="전국">전국</option>
             </select>
             <select
-              className="border border-gray-300 rounded-lg p-3 w-full text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="border border-gray-300 rounded-lg p-3 w-full text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={selectedTarget}
               onChange={(e) => setSelectedTarget(e.target.value)}
             >
@@ -181,12 +173,12 @@ export default function Home() {
               <div key={policy.id} className="relative bg-white p-6 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1">
                 <Link href={`/policy/${policy.id}`} className="block">
                   <h2 className="text-2xl font-semibold mb-2 text-gray-900 leading-tight">{policy.title}</h2>
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-3">{policy.description}</p>
+                  <p className="text-gray-600 text-base mb-4 line-clamp-3">{policy.description}</p>
                   <div className="flex flex-wrap gap-2">
-                    <span className="inline-block bg-indigo-50 text-indigo-700 text-xs font-medium px-3 py-1 rounded-full">
+                    <span className="inline-block bg-blue-100 text-blue-800 text-xs font-medium px-3 py-1 rounded-full">
                       {policy.target}
                     </span>
-                    <span className="inline-block bg-emerald-50 text-emerald-700 text-xs font-medium px-3 py-1 rounded-full">
+                    <span className="inline-block bg-green-100 text-green-800 text-xs font-medium px-3 py-1 rounded-full">
                       {policy.region}
                     </span>
                   </div>

@@ -110,7 +110,7 @@ export default function PolicyDetail() {
         <div className="text-center p-8 bg-white rounded-xl shadow-lg">
           <h2 className="text-2xl font-bold text-red-600 mb-4">오류 발생!</h2>
           <p className="text-lg text-gray-600 mb-6">{error}</p>
-          <Link href="/" className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">
+          <Link href="/" className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
             목록으로 돌아가기
           </Link>
         </div>
@@ -124,7 +124,7 @@ export default function PolicyDetail() {
         <div className="text-center p-8 bg-white rounded-xl shadow-lg">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">정책을 찾을 수 없습니다.</h2>
           <p className="text-lg text-gray-600 mb-6">요청하신 정책 정보를 찾을 수 없습니다. URL을 확인하거나 목록으로 돌아가세요.</p>
-          <Link href="/" className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">
+          <Link href="/" className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
             목록으로 돌아가기
           </Link>
         </div>
@@ -142,7 +142,7 @@ export default function PolicyDetail() {
             <div className="flex items-center bg-gray-50 p-3 rounded-lg">
               <span className="text-gray-500 mr-2">👥</span>
               <span className="font-semibold text-gray-800">대상:</span>
-              <span className="ml-2 text-indigo-600">{policy.target}</span>
+              <span className="ml-2 text-blue-600">{policy.target}</span>
             </div>
             <div className="flex items-center bg-gray-50 p-3 rounded-lg">
               <span className="text-gray-500 mr-2">📍</span>
