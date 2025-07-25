@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
+import { useParams } from 'next/navigation'; // Import useParams
 
 interface Policy {
   id: number;
@@ -12,7 +13,8 @@ interface Policy {
   region: string;
 }
 
-export default function PolicyDetail({ params }: { params: { id: string } }) {
+export default function PolicyDetail() { // Remove params from here
+  const { id } = useParams(); // Get id using useParams
   const [policy, setPolicy] = useState<Policy | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -21,10 +23,14 @@ export default function PolicyDetail({ params }: { params: { id: string } }) {
     async function fetchPolicy() {
       setLoading(true);
       setError(null);
+      if (!id) { // Handle case where id might be undefined initially
+        setLoading(false);
+        return;
+      }
       const { data, error } = await supabase
         .from('policies')
         .select('*')
-        .eq('id', parseInt(params.id))
+        .eq('id', parseInt(id as string))
         .single();
 
       if (error) {
@@ -37,7 +43,7 @@ export default function PolicyDetail({ params }: { params: { id: string } }) {
     }
 
     fetchPolicy();
-  }, [params.id]);
+  }, [id]); // Depend on id
 
   if (loading) {
     return (
