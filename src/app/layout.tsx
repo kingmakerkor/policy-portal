@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google"; // Using Inter font for simplicity
+import Link from "next/link";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -24,7 +25,7 @@ export default function RootLayout({
         <div className="flex flex-col min-h-screen">
           <header className="bg-blue-600 text-white p-4 shadow-md">
             <nav className="container mx-auto flex justify-between items-center">
-              <a href="/" className="text-2xl font-bold">정부 정책 및 지원금 정보</a>
+              <Link href="/" className="text-2xl font-bold">정부 정책 및 지원금 정보</Link>
             </nav>
           </header>
           <main className="flex-grow">
