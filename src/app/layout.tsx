@@ -18,12 +18,13 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <head>
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1542451375735648"
           crossOrigin="anonymous"></script>
       </head>
       <body className={inter.className}>
         <div className="flex flex-col min-h-screen">
-          <header className="bg-blue-600 text-white p-4 shadow-md">
+          <header className="bg-primary text-white p-4 shadow-md">
             <nav className="container mx-auto flex justify-between items-center">
               <Link href="/" className="text-2xl font-bold">정부 정책 및 지원금 정보</Link>
             </nav>

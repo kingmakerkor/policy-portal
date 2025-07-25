@@ -12,6 +12,17 @@ interface Policy {
   region: string;
 }
 
+const PolicySkeleton = () => (
+  <div className="bg-white p-6 rounded-lg shadow-md animate-pulse">
+    <div className="h-6 bg-gray-200 rounded w-3/4 mb-2"></div>
+    <div className="h-4 bg-gray-200 rounded w-full mb-4"></div>
+    <div className="flex gap-2">
+      <div className="h-5 bg-gray-200 rounded-full w-16"></div>
+      <div className="h-5 bg-gray-200 rounded-full w-16"></div>
+    </div>
+  </div>
+);
+
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedRegion, setSelectedRegion] = useState('all');
@@ -19,26 +30,48 @@ export default function Home() {
   const [policies, setPolicies] = useState<Policy[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [favoritePolicies, setFavoritePolicies] = useState<number[]>([]);
 
   useEffect(() => {
-    async function fetchPolicies() {
-      setLoading(true);
-      setError(null);
-      const { data, error } = await supabase
-        .from('policies')
-        .select('id, title, description, target, region');
-
-      if (error) {
-        console.error('Error fetching policies:', error);
-        setError('정책 정보를 불러오는 데 실패했습니다.');
-      } else {
-        setPolicies(data || []);
-      }
-      setLoading(false);
+    const storedFavorites = localStorage.getItem('favoritePolicies');
+    if (storedFavorites) {
+      setFavoritePolicies(JSON.parse(storedFavorites));
     }
+  }, []);
 
+  useEffect(() => {
+    localStorage.setItem('favoritePolicies', JSON.stringify(favoritePolicies));
+  }, [favoritePolicies]);
+
+  const fetchPolicies = async () => {
+    setLoading(true);
+    setError(null);
+    const { data, error } = await supabase
+      .from('policies')
+      .select('id, title, description, target, region');
+
+    if (error) {
+      console.error('Error fetching policies:', error);
+      setError('정책 정보를 불러오는 데 실패했습니다. 다시 시도해주세요.');
+    } else {
+      setPolicies(data || []);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
     fetchPolicies();
   }, []);
+
+  const toggleFavorite = (policyId: number) => {
+    setFavoritePolicies(prevFavorites => {
+      if (prevFavorites.includes(policyId)) {
+        return prevFavorites.filter(id => id !== policyId);
+      } else {
+        return [...prevFavorites, policyId];
+      }
+    });
+  };
 
   const filteredPolicies = policies.filter(policy => {
     return (
@@ -48,30 +81,31 @@ export default function Home() {
     );
   });
 
-  if (loading) {
-    return (
-      <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-gray-50">
-        <p className="text-lg text-gray-700">정책 정보를 불러오는 중입니다...</p>
-      </main>
-    );
-  }
-
   if (error) {
     return (
-      <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-gray-50">
-        <p className="text-lg text-red-500">오류: {error}</p>
+      <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-color-background">
+        <div className="text-center p-8 bg-white rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-red-600 mb-4">오류 발생!</h2>
+          <p className="text-lg text-color-text-secondary mb-6">{error}</p>
+          <button
+            onClick={fetchPolicies}
+            className="px-6 py-3 bg-primary text-white rounded-md hover:bg-primary-dark transition-colors"
+          >
+            다시 시도
+          </button>
+        </div>
       </main>
     );
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-8 bg-gray-50">
+    <main className="flex min-h-screen flex-col items-center p-8 bg-color-background">
       <div className="w-full max-w-4xl">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+          <h1 className="text-4xl font-bold tracking-tight text-color-text-primary sm:text-5xl">
             정부 정책 및 지원금 정보
           </h1>
-          <p className="mt-4 text-lg leading-8 text-gray-600">
+          <p className="mt-4 text-lg leading-8 text-color-text-secondary">
             나에게 맞는 지원금을 찾아보세요.
           </p>
         </div>
@@ -130,12 +164,14 @@ export default function Home() {
         </div>
 
         <div className="grid gap-6">
-          {filteredPolicies.length > 0 ? (
+          {loading ? (
+            Array.from({ length: 5 }).map((_, index) => <PolicySkeleton key={index} />)
+          ) : filteredPolicies.length > 0 ? (
             filteredPolicies.map((policy) => (
-              <Link key={policy.id} href={`/policy/${policy.id}`}>
-                <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer">
-                  <h2 className="text-xl font-bold mb-2 text-gray-800">{policy.title}</h2>
-                  <p className="text-gray-600 mb-4">{policy.description}</p>
+              <div key={policy.id} className="relative bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <Link href={`/policy/${policy.id}`} className="block">
+                  <h2 className="text-xl font-bold mb-2 text-color-text-primary">{policy.title}</h2>
+                  <p className="text-color-text-secondary mb-4">{policy.description}</p>
                   <div className="flex gap-2 flex-wrap">
                     <span className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">
                       {policy.target}
@@ -144,12 +180,30 @@ export default function Home() {
                       {policy.region}
                     </span>
                   </div>
-                </div>
-              </Link>
+                </Link>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevent Link click
+                    e.preventDefault(); // Prevent Link click
+                    toggleFavorite(policy.id);
+                  }}
+                  className="absolute top-4 right-4 p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+                  aria-label="즐겨찾기 추가/제거"
+                >
+                  <svg
+                    className={`w-6 h-6 ${favoritePolicies.includes(policy.id) ? 'text-yellow-500' : 'text-gray-400'}`}
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279L.001 9.306l8.332-1.151L12 .587z" />
+                  </svg>
+                </button>
+              </div>
             ))
           ) : (
             <div className="text-center py-12">
-              <p className="text-lg text-gray-500">검색 결과가 없습니다.</p>
+              <p className="text-lg text-color-text-secondary">검색 결과가 없습니다.</p>
             </div>
           )}
         </div>
