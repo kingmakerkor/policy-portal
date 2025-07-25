@@ -32,7 +32,7 @@ export default function RootLayout({
           <main className="flex-grow">
             {children}
           </main>
-          <footer className="bg-gray-800 text-white p-4 text-center mt-auto">
+          <footer className="bg-[var(--color-text-primary)] text-white p-4 text-center mt-auto">
             <div className="container mx-auto">
               &copy; {new Date().getFullYear()} 정부 정책 및 지원금 정보. All rights reserved.
             </div>

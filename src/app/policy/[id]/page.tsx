@@ -163,12 +163,12 @@ export default function PolicyDetail() {
             <div className="flex items-center bg-gray-100 p-3 rounded-md">
               <span className="text-color-text-secondary mr-2">👥</span>
               <span className="font-semibold text-color-text-primary">대상:</span>
-              <span className="ml-2 text-blue-700">{policy.target}</span>
+              <span className="ml-2 text-[var(--color-primary)]">{policy.target}</span>
             </div>
             <div className="flex items-center bg-gray-100 p-3 rounded-md">
               <span className="text-color-text-secondary mr-2">📍</span>
               <span className="font-semibold text-color-text-primary">지역:</span>
-              <span className="ml-2 text-green-700">{policy.region}</span>
+              <span className="ml-2 text-[var(--color-secondary)]">{policy.region}</span>
             </div>
           </div>
 
@@ -211,14 +211,14 @@ export default function PolicyDetail() {
             <div className="flex flex-wrap gap-3">
               <button
                 onClick={handleCopyLink}
-                className="flex items-center px-4 py-2 bg-gray-200 text-color-text-primary rounded-md hover:bg-gray-300 transition-colors"
+                className="flex items-center px-4 py-2 bg-gray-200 text-[var(--color-text-primary)] rounded-md hover:bg-gray-300 transition-colors"
               >
                 🔗 링크 복사
               </button>
               {copySuccess && <span className="text-green-600 text-sm ml-2">{copySuccess}</span>}
               <button
                 onClick={shareOnFacebook}
-                className="flex items-center px-4 py-2 bg-blue-700 text-white rounded-md hover:bg-blue-800 transition-colors"
+                className="flex items-center px-4 py-2 bg-[var(--color-primary)] text-white rounded-md hover:bg-primary-dark transition-colors"
               >
                 👍 페이스북
               </button>

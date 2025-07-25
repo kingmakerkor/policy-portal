@@ -173,10 +173,10 @@ export default function Home() {
                   <h2 className="text-xl font-bold mb-2 text-color-text-primary">{policy.title}</h2>
                   <p className="text-color-text-secondary mb-4">{policy.description}</p>
                   <div className="flex gap-2 flex-wrap">
-                    <span className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">
+                    <span className="inline-block bg-[var(--color-primary)]/[.1] text-[var(--color-primary)] text-xs font-semibold px-2.5 py-0.5 rounded-full">
                       {policy.target}
                     </span>
-                    <span className="inline-block bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">
+                    <span className="inline-block bg-[var(--color-secondary)]/[.1] text-[var(--color-secondary)] text-xs font-semibold px-2.5 py-0.5 rounded-full">
                       {policy.region}
                     </span>
                   </div>
