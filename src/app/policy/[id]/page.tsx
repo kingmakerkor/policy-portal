@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import { useParams } from 'next/navigation';
-import FeedbackForm from '@/components/FeedbackForm'; // Import FeedbackForm
+import FeedbackForm from '@/components/FeedbackForm';
 
 interface Policy {
   id: number;

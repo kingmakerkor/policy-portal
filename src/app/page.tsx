@@ -70,12 +70,12 @@ export default function Home() {
   }, []);
 
   const toggleFavorite = (policyId: number) => {
-    if (favoritePolicies === null) return;
     setFavoritePolicies(prevFavorites => {
-      if (prevFavorites.includes(policyId)) {
-        return prevFavorites.filter(id => id !== policyId);
+      const currentFavorites = prevFavorites || []; // Ensure it's an array
+      if (currentFavorites.includes(policyId)) {
+        return currentFavorites.filter(id => id !== policyId);
       } else {
-        return [...prevFavorites, policyId];
+        return [...currentFavorites, policyId];
       }
     });
   };
@@ -181,7 +181,7 @@ export default function Home() {
               <div key={policy.id} className="relative bg-white p-6 rounded-xl shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1">
                 <Link href={`/policy/${policy.id}`} className="block">
                   <h2 className="text-2xl font-semibold mb-2 text-gray-900 leading-tight">{policy.title}</h2>
-                  <p className="text-gray-600 text-base mb-4 line-clamp-3">{policy.description}</p>
+                  <p className="text-gray-600 text-sm mb-4 line-clamp-3">{policy.description}</p>
                   <div className="flex flex-wrap gap-2">
                     <span className="inline-block bg-indigo-50 text-indigo-700 text-xs font-medium px-3 py-1 rounded-full">
                       {policy.target}
