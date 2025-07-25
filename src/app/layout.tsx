@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <head>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_PUBLISHER_ID"
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1542451375735648"
           crossOrigin="anonymous"></script>
       </head>
       <body className={inter.className}>

@@ -121,8 +121,8 @@ export default function Home() {
         <div className="my-8 text-center">
           <ins className="adsbygoogle"
             style={{ display: 'block' }}
-            data-ad-client="ca-pub-YOUR_ADSENSE_PUBLISHER_ID"
-            data-ad-slot="YOUR_ADSENSE_AD_SLOT_ID">
+            data-ad-client="ca-pub-1542451375735648"
+            data-ad-slot="5568997361">
           </ins>
           <script>
             (adsbygoogle = window.adsbygoogle || []).push({});

@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
-import { useParams } from 'next/navigation'; // Import useParams
+import { useParams } from 'next/navigation';
 
 interface Policy {
   id: number;
@@ -13,8 +13,8 @@ interface Policy {
   region: string;
 }
 
-export default function PolicyDetail() { // Remove params from here
-  const { id } = useParams(); // Get id using useParams
+export default function PolicyDetail() {
+  const { id } = useParams();
   const [policy, setPolicy] = useState<Policy | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -23,7 +23,7 @@ export default function PolicyDetail() { // Remove params from here
     async function fetchPolicy() {
       setLoading(true);
       setError(null);
-      if (!id) { // Handle case where id might be undefined initially
+      if (!id) {
         setLoading(false);
         return;
       }
@@ -43,7 +43,7 @@ export default function PolicyDetail() { // Remove params from here
     }
 
     fetchPolicy();
-  }, [id]); // Depend on id
+  }, [id]);
 
   if (loading) {
     return (
@@ -83,20 +83,40 @@ export default function PolicyDetail() { // Remove params from here
     <main className="flex min-h-screen flex-col items-center p-8 bg-gray-50">
       <div className="w-full max-w-4xl">
         <div className="bg-white p-8 rounded-lg shadow-md">
-          <h1 className="text-3xl font-bold mb-4 text-gray-800">{policy.title}</h1>
-          <div className="flex gap-2 mb-6 flex-wrap">
-            <span className="inline-block bg-blue-100 text-blue-800 text-lg font-semibold px-3 py-1 rounded-full">
-              {policy.target}
-            </span>
-            <span className="inline-block bg-green-100 text-green-800 text-lg font-semibold px-3 py-1 rounded-full">
-              {policy.region}
-            </span>
+          <h1 className="text-3xl font-bold mb-6 text-gray-800">{policy.title}</h1>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div className="flex items-center bg-gray-100 p-3 rounded-md">
+              <span className="text-gray-600 mr-2">👥</span>
+              <span className="font-semibold text-gray-700">대상:</span>
+              <span className="ml-2 text-blue-700">{policy.target}</span>
+            </div>
+            <div className="flex items-center bg-gray-100 p-3 rounded-md">
+              <span className="text-gray-600 mr-2">📍</span>
+              <span className="font-semibold text-gray-700">지역:</span>
+              <span className="ml-2 text-green-700">{policy.region}</span>
+            </div>
           </div>
-          <div className="prose max-w-none text-gray-700">
-            <p className="text-xl">{policy.description}</p>
+
+          <div className="bg-gray-50 p-6 rounded-lg mb-6">
+            <h2 className="text-xl font-bold mb-3 text-gray-800">정책 설명</h2>
+            <p className="text-gray-700 leading-relaxed text-lg">{policy.description}</p>
           </div>
+
+          {/* AdSense Ad Unit for detail page */}
+          <div className="my-8 text-center">
+            <ins className="adsbygoogle"
+              style={{ display: 'block' }}
+              data-ad-client="ca-pub-1542451375735648"
+              data-ad-slot="5568997361">
+            </ins>
+            <script>
+              (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+          </div>
+
           <div className="mt-8 pt-6 border-t">
-            <Link href="/" className="text-blue-600 hover:underline">
+            <Link href="/" className="text-blue-600 hover:underline flex items-center">
               &larr; 목록으로 돌아가기
             </Link>
           </div>
