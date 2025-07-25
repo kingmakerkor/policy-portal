@@ -24,7 +24,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <div className="flex flex-col min-h-screen">
-          <header className="bg-primary text-white p-4 shadow-md">
+          <header className="bg-[var(--color-primary)] text-white p-4 shadow-md">
             <nav className="container mx-auto flex justify-between items-center">
               <Link href="/" className="text-2xl font-bold">정부 정책 및 지원금 정보</Link>
             </nav>

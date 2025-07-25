@@ -6,20 +6,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
 
 :root {
-  --color-primary: #2563eb; /* blue-600 */
-  --color-secondary: #6366f1; /* indigo-500 */
-  --color-background: #f9fafb; /* gray-50 */
-  --color-text-primary: #1f2937; /* gray-800 */
-  --color-text-secondary: #4b5563; /* gray-600 */
+  --color-primary: #4F46E5; /* Indigo 600 */
+  --color-secondary: #10B981; /* Emerald 500 */
+  --color-background: #F9FAFB; /* Gray 50 */
+  --color-card-background: #FFFFFF; /* White */
+  --color-text-primary: #1F2937; /* Gray 800 */
+  --color-text-secondary: #6B7280; /* Gray 500 */
+  --color-border: #E5E7EB; /* Gray 200 */
+  --color-tag-bg-primary: #EEF2FF; /* Indigo 50 */
+  --color-tag-text-primary: #4F46E5; /* Indigo 600 */
+  --color-tag-bg-secondary: #ECFDF5; /* Emerald 50 */
+  --color-tag-text-secondary: #10B981; /* Emerald 600 */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-primary: #60a5fa; /* blue-400 for dark mode */
-    --color-secondary: #818cf8; /* indigo-400 for dark mode */
-    --color-background: #111827; /* gray-900 for dark mode */
-    --color-text-primary: #f3f4f6; /* gray-100 for dark mode */
-    --color-text-secondary: #d1d5db; /* gray-300 for dark mode */
+    --color-primary: #818CF8; /* Indigo 400 */
+    --color-secondary: #34D399; /* Emerald 400 */
+    --color-background: #1F2937; /* Gray 800 */
+    --color-card-background: #374151; /* Gray 700 */
+    --color-text-primary: #F9FAFB; /* Gray 50 */
+    --color-text-secondary: #D1D5DB; /* Gray 400 */
+    --color-border: #4B5563; /* Gray 600 */
+    --color-tag-bg-primary: #4338CA; /* Indigo 700 */
+    --color-tag-text-primary: #C7D2FE; /* Indigo 200 */
+    --color-tag-bg-secondary: #065F46; /* Emerald 800 */
+    --color-tag-text-secondary: #A7F3D0; /* Emerald 200 */
   }
 }
 
