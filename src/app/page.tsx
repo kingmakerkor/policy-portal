@@ -80,6 +80,14 @@ export default function Home() {
     });
   };
 
+  const filteredPolicies: Policy[] = policies.filter(policy => { // Explicitly type filteredPolicies
+    return (
+      (policy.title.includes(searchTerm) || policy.description.includes(searchTerm)) &&
+      (selectedRegion === 'all' || policy.region === selectedRegion) &&
+      (selectedTarget === 'all' || policy.target === selectedTarget)
+    );
+  });
+
   if (error) {
     return (
       <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-gray-50">
